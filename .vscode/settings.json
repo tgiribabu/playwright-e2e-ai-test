@@ -1,0 +1,6 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "playwright.reuseBrowser": true,
+  "editor.formatOnSave": true,
+  "files.exclude": { "allure-results": true, "test-results": true, "playwright-report": true }
+}

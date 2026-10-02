@@ -1,0 +1,7 @@
+# Playbook: add an environment or tenant
+1. Environment: copy `config/environments/qa.json` to `<env>.json`; set URLs, DB host/user, Salesforce settings, `readOnly`.
+   Tenant: add it under `tenants` with `displayName` and optional `overrides` (deep-merged, e.g. a different `ui.baseUrl`).
+2. Secrets: add env vars named `<ENV>_<NAME>` (or `<ENV>_<TENANT>_<NAME>`) in the CI secret store / git-ignored `.env.<env>`. Never in JSON.
+3. Document new secret names in `.env.example` (names only, no real values).
+4. Tenant-specific test data: add the tenant's key to tenant-keyed JSON (e.g. `data/json/api-patients.json`).
+5. Verify: `npm run test:unit` (schema check of every env file), then `TEST_ENV=<env> TENANT=<t> npm run health`.

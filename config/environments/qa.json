@@ -1,0 +1,47 @@
+{
+  "name": "qa",
+  "readOnly": false,
+  "defaultTenant": "acme",
+  "ui": {
+    "baseUrl": "https://qa.app.example.com",
+    "usernameSecret": "APP_USERNAME",
+    "passwordSecret": "APP_PASSWORD"
+  },
+  "api": {
+    "baseUrl": "https://qa.api.example.com",
+    "healthPath": "/health",
+    "tokenPath": "/oauth/token",
+    "usernameSecret": "APP_USERNAME",
+    "passwordSecret": "APP_PASSWORD"
+  },
+  "db": {
+    "host": "qa-db.internal.example.com",
+    "port": 5432,
+    "database": "app",
+    "user": "qa_readwrite",
+    "passwordSecret": "DB_PASSWORD",
+    "ssl": true
+  },
+  "salesforce": {
+    "loginUrl": "https://test.salesforce.com",
+    "instanceUrl": "https://example--qa.sandbox.my.salesforce.com",
+    "apiVersion": "62.0",
+    "authFlow": "jwt",
+    "clientIdSecret": "SF_CLIENT_ID",
+    "usernameSecret": "SF_USERNAME",
+    "privateKeyPathSecret": "SF_JWT_KEY_PATH"
+  },
+  "tenants": {
+    "acme": {
+      "displayName": "Acme Health"
+    },
+    "globex": {
+      "displayName": "Globex Clinics",
+      "overrides": {
+        "ui": {
+          "baseUrl": "https://globex.qa.app.example.com"
+        }
+      }
+    }
+  }
+}

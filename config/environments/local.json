@@ -1,0 +1,42 @@
+{
+  "$comment": "Local demo stack (npm run demo:up + local PostgreSQL). Secrets are NAMES of env vars, never values.",
+  "name": "local",
+  "readOnly": false,
+  "defaultTenant": "acme",
+  "ui": {
+    "baseUrl": "http://localhost:4400",
+    "usernameSecret": "APP_USERNAME",
+    "passwordSecret": "APP_PASSWORD"
+  },
+  "api": {
+    "baseUrl": "http://localhost:4400",
+    "healthPath": "/api/health",
+    "tokenPath": "/api/auth/token",
+    "usernameSecret": "APP_USERNAME",
+    "passwordSecret": "APP_PASSWORD"
+  },
+  "db": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "appdb",
+    "user": "qa_app",
+    "passwordSecret": "DB_PASSWORD",
+    "ssl": false
+  },
+  "salesforce": {
+    "$comment": "Points at the demo app's Salesforce mock. In qa/stage use your sandbox My Domain.",
+    "loginUrl": "http://localhost:4400",
+    "apiVersion": "62.0",
+    "authFlow": "client_credentials",
+    "clientIdSecret": "SF_CLIENT_ID",
+    "clientSecretSecret": "SF_CLIENT_SECRET"
+  },
+  "tenants": {
+    "acme": {
+      "displayName": "Acme Health"
+    },
+    "globex": {
+      "displayName": "Globex Clinics"
+    }
+  }
+}

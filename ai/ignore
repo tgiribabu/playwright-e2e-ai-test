@@ -1,0 +1,15 @@
+# Canonical "do not read / do not index" list for AI tools (generated into each tool's ignore file).
+.env
+.env.*
+!.env.example
+.secrets/
+node_modules/
+test-results/
+playwright-report/
+blob-report/
+allure-results/
+allure-report/
+*.zip
+*.log
+package-lock.json
+ai/out/

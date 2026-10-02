@@ -1,0 +1,27 @@
+# playwright-e2e-test
+
+> Multi-tenant Playwright + TypeScript test framework: UI (page objects, components, self-healing locators), API, PostgreSQL, Salesforce SOQL, multi-source test data, file validation, device matrix.
+
+## Start here
+- [AGENTS.md](AGENTS.md): rules for AI assistants
+- [Repository map](ai/context/repo-map.md): one line per file
+- [Architecture](docs/ARCHITECTURE.md)
+- [Locator standard](docs/LOCATOR-STANDARD.md)
+
+## Playbooks
+- [add-page-object](ai/playbooks/add-page-object.md): Add a page object (or component) with its locator file
+- [write-ui-test](ai/playbooks/write-ui-test.md): Write a UI end-to-end test (API arrange, UI act, DB/SOQL assert)
+- [write-api-test](ai/playbooks/write-api-test.md): Write an API test with schema validation and database cross-check
+- [fix-failing-test](ai/playbooks/fix-failing-test.md): Diagnose and fix a failing, flaky or self-healed test by root cause
+- [add-environment-or-tenant](ai/playbooks/add-environment-or-tenant.md): Add an environment or tenant (config, secrets, health check)
+- [review-change](ai/playbooks/review-change.md): Review a change against the project rules before merging
+
+## Reference implementations
+- [Master showcase test](tests/showcase/master-showcase.spec.ts)
+- [Locator file](src/ui/pages/demo/login.locators.ts) and [page object](src/ui/pages/demo/login.page.ts)
+- [API test](tests/api/patients.api.spec.ts)
+
+## Optional
+- [Glossary](ai/context/glossary.md)
+- [AI layer](ai/README.md)
+- [Review of the previous version](docs/REVIEW.md)

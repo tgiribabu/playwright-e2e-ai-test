@@ -1,0 +1,16 @@
+{
+  "$comment": "Public Katalon CURA demo site (the original tests in this repo). UI only: health check skips API/DB/Salesforce.",
+  "name": "cura",
+  "readOnly": false,
+  "defaultTenant": "public",
+  "ui": {
+    "baseUrl": "https://katalon-demo-cura.herokuapp.com",
+    "usernameSecret": "UI_USERNAME",
+    "passwordSecret": "UI_PASSWORD"
+  },
+  "tenants": {
+    "public": {
+      "displayName": "CURA demo"
+    }
+  }
+}

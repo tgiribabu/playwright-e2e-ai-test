@@ -1,0 +1,188 @@
+{
+  "$comment": "Single source of truth for the AI layer. Edit files in ai/, then run `npm run ai:sync`. Never edit generated adapter files.",
+  "rules": [
+    {
+      "id": "ui-layer",
+      "file": "ai/rules/ui-layer.md",
+      "description": "Page objects, components and *.locators.ts files",
+      "globs": [
+        "src/ui/**"
+      ],
+      "keywords": [
+        "page",
+        "locator",
+        "selector",
+        "component",
+        "ui",
+        "button",
+        "table",
+        "modal",
+        "dropdown",
+        "toast",
+        "element"
+      ]
+    },
+    {
+      "id": "tests",
+      "file": "ai/rules/tests.md",
+      "description": "Writing and changing specs",
+      "globs": [
+        "tests/**"
+      ],
+      "keywords": [
+        "test",
+        "spec",
+        "assert",
+        "flaky",
+        "failing",
+        "showcase",
+        "data-driven"
+      ]
+    },
+    {
+      "id": "backend-and-data",
+      "file": "ai/rules/backend-and-data.md",
+      "description": "API/DB/Salesforce clients, schemas and test data",
+      "globs": [
+        "src/clients/**",
+        "src/data/**",
+        "src/schemas/**",
+        "data/**"
+      ],
+      "keywords": [
+        "api",
+        "db",
+        "database",
+        "sql",
+        "postgres",
+        "soql",
+        "salesforce",
+        "schema",
+        "excel",
+        "json",
+        "csv",
+        "data",
+        "file",
+        "download"
+      ]
+    },
+    {
+      "id": "config",
+      "file": "ai/rules/config.md",
+      "description": "Environments, tenants, secrets, devices",
+      "globs": [
+        "config/**",
+        "src/config/**",
+        "playwright.config.ts"
+      ],
+      "keywords": [
+        "env",
+        "environment",
+        "tenant",
+        "secret",
+        "config",
+        "device",
+        "mobile",
+        "browser",
+        "shard",
+        "prod"
+      ]
+    }
+  ],
+  "playbooks": [
+    {
+      "id": "add-page-object",
+      "description": "Add a page object (or component) with its locator file",
+      "examples": [
+        "src/ui/pages/demo/login.locators.ts",
+        "src/ui/pages/demo/login.page.ts",
+        "src/core/locators/locator.types.ts"
+      ],
+      "keywords": [
+        "page object",
+        "new page",
+        "locator",
+        "component",
+        "selector"
+      ]
+    },
+    {
+      "id": "write-ui-test",
+      "description": "Write a UI end-to-end test (API arrange, UI act, DB/SOQL assert)",
+      "examples": [
+        "tests/ui/demo/appointments.spec.ts",
+        "src/fixtures/index.ts"
+      ],
+      "keywords": [
+        "ui test",
+        "e2e",
+        "end to end",
+        "journey",
+        "ui"
+      ]
+    },
+    {
+      "id": "write-api-test",
+      "description": "Write an API test with schema validation and database cross-check",
+      "examples": [
+        "tests/api/patients.api.spec.ts",
+        "src/schemas/appointment.schemas.ts"
+      ],
+      "keywords": [
+        "api test",
+        "endpoint",
+        "rest",
+        "api"
+      ]
+    },
+    {
+      "id": "fix-failing-test",
+      "description": "Diagnose and fix a failing, flaky or self-healed test by root cause",
+      "examples": [
+        "src/core/locators/locator.types.ts"
+      ],
+      "keywords": [
+        "fix",
+        "failing",
+        "fails",
+        "flaky",
+        "broken",
+        "heal",
+        "error",
+        "timeout"
+      ]
+    },
+    {
+      "id": "add-environment-or-tenant",
+      "description": "Add an environment or tenant (config, secrets, health check)",
+      "examples": [
+        "config/environments/qa.json",
+        "src/config/env.schema.ts"
+      ],
+      "keywords": [
+        "environment",
+        "tenant",
+        "env",
+        "config",
+        "secret"
+      ]
+    },
+    {
+      "id": "review-change",
+      "description": "Review a change against the project rules before merging",
+      "examples": [],
+      "keywords": [
+        "review",
+        "diff",
+        "pr",
+        "pull request",
+        "merge"
+      ]
+    }
+  ],
+  "budgets": {
+    "AGENTS.md": 1600,
+    "rule": 700,
+    "playbook": 900
+  }
+}

@@ -1,0 +1,89 @@
+name: Playwright
+on:
+  push: { branches: [main] }
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      test_env: { description: 'Environment (local|qa|stage|prod)', default: 'local' }
+      tenant: { description: 'Tenant id (blank = env default)', default: '' }
+      devices: { description: 'DEVICES (e.g. desktop,mobile)', default: 'desktop,mobile' }
+
+concurrency:
+  group: playwright-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run verify
+
+  test:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    env:
+      CI: 'true'
+      TEST_ENV: ${{ inputs.test_env || 'local' }}
+      TENANT: ${{ inputs.tenant }}
+      DEVICES: ${{ inputs.devices || 'desktop,mobile' }}
+      # Local demo stack credentials (not secrets). Real environments read from repository secrets:
+      APP_USERNAME: ${{ secrets.APP_USERNAME || 'demo.user' }}
+      APP_PASSWORD: ${{ secrets.APP_PASSWORD || 'demo-pass-123' }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD || 'localdev' }}
+      SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID || 'demo-client-id' }}
+      SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET || 'demo-client-secret' }}
+    services:
+      postgres:
+        image: postgres:16
+        env: { POSTGRES_USER: qa_app, POSTGRES_PASSWORD: localdev, POSTGRES_DB: appdb }
+        ports: ['5432:5432']
+        options: --health-cmd "pg_isready -U qa_app" --health-interval 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - name: Start local demo stack
+        if: env.TEST_ENV == 'local'
+        run: |
+          npm run demo:up > demo-app.log 2>&1 &
+          npx --yes wait-on@8 http://localhost:4400/api/health --timeout 30000
+      - run: npx playwright test --shard=${{ matrix.shard }}/4
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: blob-report-${{ matrix.shard }}
+          path: blob-report
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: allure-results-${{ matrix.shard }}
+          path: allure-results
+          retention-days: 7
+
+  report:
+    needs: test
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with: { path: all-blob-reports, pattern: blob-report-*, merge-multiple: true }
+      - run: npx playwright merge-reports --reporter html ./all-blob-reports
+      - uses: actions/upload-artifact@v4
+        with: { name: playwright-report, path: playwright-report, retention-days: 30 }

@@ -1,0 +1,17 @@
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/allure-results/
+/allure-report/
+/playwright/.cache/
+/playwright/.auth/
+.env
+.env.*
+!.env.example
+.secrets/
+*.log
+.DS_Store
+verify.config.ts
+ai/out/
+.claude/settings.local.json

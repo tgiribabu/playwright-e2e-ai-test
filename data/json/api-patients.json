@@ -1,0 +1,34 @@
+{
+  "$comment": "Keyed by tenant: each tenant has its own plans. The spec picks the active tenant's cases.",
+  "acme": [
+    {
+      "caseId": "API-PAT-001",
+      "insuranceCode": "MEDICARE",
+      "expectStatus": 201
+    },
+    {
+      "caseId": "API-PAT-002",
+      "insuranceCode": "MEDICAID",
+      "expectStatus": 201
+    },
+    {
+      "caseId": "API-PAT-003",
+      "insuranceCode": "LEGACY",
+      "expectStatus": 422,
+      "note": "inactive plan is rejected"
+    }
+  ],
+  "globex": [
+    {
+      "caseId": "API-PAT-101",
+      "insuranceCode": "PRIVATE",
+      "expectStatus": 201
+    },
+    {
+      "caseId": "API-PAT-102",
+      "insuranceCode": "MEDICARE",
+      "expectStatus": 422,
+      "note": "another tenant's plan is rejected"
+    }
+  ]
+}

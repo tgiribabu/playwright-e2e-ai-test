@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run verify)",
+      "Bash(npm run typecheck)",
+      "Bash(npm run lint:locators)",
+      "Bash(npm run ai:check)",
+      "Bash(npm run health)",
+      "Bash(npx playwright test *)",
+      "Bash(git diff *)",
+      "Bash(git status *)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./.secrets/**)",
+      "Edit(./.env)",
+      "Edit(./.secrets/**)",
+      "Bash(git push *)"
+    ]
+  }
+}

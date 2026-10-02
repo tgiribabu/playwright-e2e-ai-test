@@ -1,0 +1,47 @@
+{
+  "name": "stage",
+  "readOnly": false,
+  "defaultTenant": "acme",
+  "ui": {
+    "baseUrl": "https://stage.app.example.com",
+    "usernameSecret": "APP_USERNAME",
+    "passwordSecret": "APP_PASSWORD"
+  },
+  "api": {
+    "baseUrl": "https://stage.api.example.com",
+    "healthPath": "/health",
+    "tokenPath": "/oauth/token",
+    "usernameSecret": "APP_USERNAME",
+    "passwordSecret": "APP_PASSWORD"
+  },
+  "db": {
+    "host": "stage-db.internal.example.com",
+    "port": 5432,
+    "database": "app",
+    "user": "stage_readwrite",
+    "passwordSecret": "DB_PASSWORD",
+    "ssl": true
+  },
+  "salesforce": {
+    "loginUrl": "https://test.salesforce.com",
+    "instanceUrl": "https://example--stage.sandbox.my.salesforce.com",
+    "apiVersion": "62.0",
+    "authFlow": "jwt",
+    "clientIdSecret": "SF_CLIENT_ID",
+    "usernameSecret": "SF_USERNAME",
+    "privateKeyPathSecret": "SF_JWT_KEY_PATH"
+  },
+  "tenants": {
+    "acme": {
+      "displayName": "Acme Health"
+    },
+    "globex": {
+      "displayName": "Globex Clinics",
+      "overrides": {
+        "ui": {
+          "baseUrl": "https://globex.stage.app.example.com"
+        }
+      }
+    }
+  }
+}

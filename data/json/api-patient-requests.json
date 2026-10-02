@@ -1,0 +1,18 @@
+{
+  "headers": {
+    "unauthenticated": {
+      "Accept": "application/json"
+    },
+    "tenantScoped": {
+      "Authorization": "Bearer {{token}}",
+      "X-Tenant-Id": "{{tenant}}",
+      "Accept": "application/json"
+    }
+  },
+  "bodies": {
+    "createPatient": {
+      "fullName": "{{fullName}}",
+      "insuranceCode": "{{insuranceCode}}"
+    }
+  }
+}

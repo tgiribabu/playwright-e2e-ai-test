@@ -1,0 +1,44 @@
+{
+  "name": "playwright-e2e-test",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Multi-tenant Playwright + TypeScript framework: UI, API, PostgreSQL, Salesforce SOQL, files, self-healing locators, device matrix",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint:locators": "node scripts/lint-locators.mjs",
+    "verify": "npm run typecheck && npm run lint:locators && npm run ai:check && npm run test:unit",
+    "demo:up": "node demo-app/server.mjs",
+    "health": "playwright test --project=health",
+    "test": "playwright test",
+    "test:unit": "playwright test --project=unit",
+    "test:api": "playwright test --project=api",
+    "test:ui": "playwright test --grep-invert @showcase",
+    "test:showcase": "playwright test tests/showcase",
+    "test:cura": "TEST_ENV=cura playwright test tests/ui/cura",
+    "test:mobile": "DEVICES=mobile playwright test tests/ui tests/showcase",
+    "report": "playwright show-report",
+    "allure": "allure serve allure-results",
+    "data:sample-excel": "tsx scripts/make-sample-excel.ts",
+    "ai:sync": "node scripts/ai/sync.mjs",
+    "ai:check": "node scripts/ai/sync.mjs --check",
+    "ai:context": "node scripts/ai/context-pack.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "csv-parse": "^6.1.0",
+    "dotenv": "^17.3.1",
+    "exceljs": "^4.4.0",
+    "pg": "^8.13.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^22.10.0",
+    "@types/pg": "^8.11.10",
+    "allure-playwright": "^3.5.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

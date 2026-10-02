@@ -1,0 +1,10 @@
+{
+  "$comment": "Production: read-only. Mutating API/DB calls are blocked at runtime and @mutating tests are excluded.",
+  "name": "prod",
+  "readOnly": true,
+  "defaultTenant": "acme",
+  "ui": { "baseUrl": "https://app.example.com" },
+  "api": { "baseUrl": "https://api.example.com", "healthPath": "/health", "tokenPath": "/oauth/token", "usernameSecret": "APP_USERNAME", "passwordSecret": "APP_PASSWORD" },
+  "db": { "host": "prod-replica.internal.example.com", "port": 5432, "database": "app", "user": "qa_readonly", "passwordSecret": "DB_PASSWORD", "ssl": true, "required": false },
+  "tenants": { "acme": { "displayName": "Acme Health" } }
+}

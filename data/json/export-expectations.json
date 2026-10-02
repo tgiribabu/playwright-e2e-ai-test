@@ -1,0 +1,5 @@
+{
+  "csvColumns": ["Reference", "Patient MRN", "Facility", "Visit Date", "Status"],
+  "maxFileBytes": 1048576,
+  "patientNamePattern": "Showcase Patient {tag}"
+}
